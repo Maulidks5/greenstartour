@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { PageHero } from "@/components/site/PageHero";
+import { SEO } from "@/components/site/SEO";
 import heroImg from "@/assets/dest-kendwa.jpg";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -29,6 +30,12 @@ const PartnershipPage = () => {
 
   return (
     <SiteLayout>
+      <SEO
+        title="Partnership"
+        description="Partner with Green Star Island Tour & Safari for hotels, travel agents, creators, referrals, and guest experiences in Zanzibar."
+        path="/partnership"
+        image={heroImg}
+      />
       <PageHero
         image={heroImg}
         title="Partnership"

@@ -11,8 +11,8 @@ export const PageHero = ({
   image: string;
   children?: ReactNode;
 }) => (
-  <section className="relative flex min-h-[400px] items-end overflow-hidden pt-32 md:min-h-[460px] md:pt-36">
-    <img src={image} alt={title} className="absolute inset-0 h-full w-full object-cover" />
+  <section className="relative flex min-h-[400px] items-end overflow-hidden bg-primary pt-32 md:min-h-[460px] md:pt-36">
+    <img src={image} alt={title} loading="eager" decoding="async" className="absolute inset-0 h-full w-full object-contain object-center md:object-cover" />
     <div className="absolute inset-0 bg-gradient-to-r from-primary/88 via-primary/58 to-primary/25" />
     <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-transparent to-primary/86" />
     <div className="container relative z-10 pb-12 text-white md:pb-14">

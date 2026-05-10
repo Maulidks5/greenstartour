@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { TourCard } from "@/components/site/TourCard";
+import { SEO, siteImage, siteUrl } from "@/components/site/SEO";
 import { whatsappMessageUrl } from "@/data/tourData";
 import { toast } from "sonner";
 import { postPublicForm } from "@/lib/publicApi";
@@ -74,8 +75,46 @@ const TourDetails = () => {
 
   return (
     <SiteLayout>
-      <section className="relative min-h-[520px] overflow-hidden pt-36">
-        <img src={tour.image} alt={tour.name} className="absolute inset-0 h-full w-full object-cover" />
+      <SEO
+        title={`${tour.name} Tour`}
+        description={`${tour.name} in ${tour.location}. ${tour.duration}. ${tour.description}`.slice(0, 155)}
+        path={`/tours/${tour.id}`}
+        image={tour.image}
+        schema={[
+          {
+            "@context": "https://schema.org",
+            "@type": "TouristTrip",
+            name: tour.name,
+            description: tour.description,
+            image: siteImage(tour.image),
+            url: siteUrl(`/tours/${tour.id}`),
+            touristType: "International tourists",
+            itinerary: tour.itinerary,
+            offers: {
+              "@type": "Offer",
+              price: tour.adultPrice || undefined,
+              priceCurrency: siteSettings.currencySymbol === "$" ? "USD" : siteSettings.currencySymbol === "€" ? "EUR" : undefined,
+              availability: "https://schema.org/InStock",
+            },
+            provider: {
+              "@type": "TravelAgency",
+              name: "Green Star Island Tour & Safari",
+              url: siteUrl("/"),
+            },
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: siteUrl("/") },
+              { "@type": "ListItem", position: 2, name: "Tours", item: siteUrl("/tours") },
+              { "@type": "ListItem", position: 3, name: tour.name, item: siteUrl(`/tours/${tour.id}`) },
+            ],
+          },
+        ]}
+      />
+      <section className="relative min-h-[520px] overflow-hidden bg-primary pt-36">
+        <img src={tour.image} alt={tour.name} loading="eager" decoding="async" className="absolute inset-0 h-full w-full object-contain object-center md:object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/55 to-primary/20" />
         <div className="absolute inset-0 bg-gradient-to-b from-primary/25 via-transparent to-primary/88" />
         <div className="container relative z-10 flex min-h-[520px] items-end pb-12 text-white">
@@ -118,7 +157,7 @@ const TourDetails = () => {
             <InfoBlock title="Photos">
               <div className="space-y-4">
                 <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-secondary">
-                  <img src={activeImage} alt={`${tour.name} selected gallery`} className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" />
+                  <img src={activeImage} alt={`${tour.name} selected gallery`} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" />
                   <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-primary">
                     {tour.categoryLabel}
                   </div>
@@ -133,7 +172,7 @@ const TourDetails = () => {
                         activeImage === image ? "border-accent shadow-gold" : "border-transparent hover:border-accent/50"
                       }`}
                     >
-                      <img src={image} alt={`${tour.name} gallery ${index + 1}`} className="h-full w-full object-cover" />
+                      <img src={image} alt={`${tour.name} gallery ${index + 1}`} loading="lazy" decoding="async" className="h-full w-full object-cover" />
                     </button>
                   ))}
                 </div>

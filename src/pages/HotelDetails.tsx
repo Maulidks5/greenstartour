@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { SiteLayout } from "@/components/site/SiteLayout";
+import { SEO, siteImage, siteUrl } from "@/components/site/SEO";
 import { whatsappMessageUrl } from "@/data/tourData";
 import { postPublicForm } from "@/lib/publicApi";
 import { toast } from "sonner";
@@ -57,8 +58,43 @@ const HotelDetails = () => {
 
   return (
     <SiteLayout>
-      <section className="relative min-h-[500px] overflow-hidden pt-36">
-        <img src={hotel.image} alt={hotel.name} className="absolute inset-0 h-full w-full object-cover" />
+      <SEO
+        title={`${hotel.name} Hotel Booking`}
+        description={`${hotel.name} in ${hotel.location}. ${hotel.description}`.slice(0, 155)}
+        path={`/hotels/${hotel.id}`}
+        image={hotel.image}
+        schema={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Hotel",
+            name: hotel.name,
+            description: hotel.description,
+            image: siteImage(hotel.image),
+            url: siteUrl(`/hotels/${hotel.id}`),
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: hotel.location,
+              addressCountry: "TZ",
+            },
+            starRating: {
+              "@type": "Rating",
+              ratingValue: hotel.rating,
+            },
+            priceRange: hotel.price,
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: siteUrl("/") },
+              { "@type": "ListItem", position: 2, name: "Hotels", item: siteUrl("/hotels") },
+              { "@type": "ListItem", position: 3, name: hotel.name, item: siteUrl(`/hotels/${hotel.id}`) },
+            ],
+          },
+        ]}
+      />
+      <section className="relative min-h-[500px] overflow-hidden bg-primary pt-36">
+        <img src={hotel.image} alt={hotel.name} loading="eager" decoding="async" className="absolute inset-0 h-full w-full object-contain object-center md:object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-primary/92 via-primary/58 to-primary/20" />
         <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-transparent to-primary/85" />
         <div className="container relative z-10 flex min-h-[500px] items-end pb-12 text-white">
@@ -97,7 +133,7 @@ const HotelDetails = () => {
             <InfoBlock title="Photos">
               <div className="space-y-4">
                 <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-secondary">
-                  <img src={selectedImage} alt={`${hotel.name} selected`} className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" />
+                  <img src={selectedImage} alt={`${hotel.name} selected`} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" />
                 </div>
                 <div className="grid grid-cols-3 gap-3 md:grid-cols-4">
                   {hotel.gallery.map((image, index) => (
@@ -109,7 +145,7 @@ const HotelDetails = () => {
                         selectedImage === image ? "border-accent shadow-gold" : "border-transparent hover:border-accent/50"
                       }`}
                     >
-                      <img src={image} alt={`${hotel.name} gallery ${index + 1}`} className="h-full w-full object-cover" />
+                      <img src={image} alt={`${hotel.name} gallery ${index + 1}`} loading="lazy" decoding="async" className="h-full w-full object-cover" />
                     </button>
                   ))}
                 </div>

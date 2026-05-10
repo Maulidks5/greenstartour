@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { PageHero } from "@/components/site/PageHero";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { TourCard } from "@/components/site/TourCard";
+import { SEO, siteUrl } from "@/components/site/SEO";
 import { whatsappUrl } from "@/data/tourData";
 import { usePublicContent } from "@/hooks/use-public-content";
 import heroImg from "@/assets/about-zanzibar.jpg";
@@ -13,6 +14,24 @@ const SafariPackages = () => {
 
   return (
     <SiteLayout>
+      <SEO
+        title="Tanzania Safari Packages"
+        description="Plan Tanzania safari packages from Zanzibar including Serengeti, Ngorongoro, and custom safari extensions."
+        path="/safari-packages"
+        image={heroImg}
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Tanzania Safari Packages",
+          url: siteUrl("/safari-packages"),
+          itemListElement: safariPackages.slice(0, 12).map((tour, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: tour.name,
+            url: siteUrl(`/tours/${tour.id}`),
+          })),
+        }}
+      />
       <PageHero
         image={heroImg}
         title="Safari Packages"

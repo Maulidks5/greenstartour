@@ -24,13 +24,15 @@ export const Hero = () => {
 
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden">
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 bg-primary">
         {heroSlides.map((item, index) => (
           <img
             key={item.image}
             src={item.image}
             alt={item.title}
-            className={`absolute inset-0 h-full w-full object-cover transition-all duration-1000 ${
+            loading={index === 0 ? "eager" : "lazy"}
+            decoding="async"
+            className={`absolute inset-0 h-full w-full object-contain object-center transition-all duration-1000 md:object-cover ${
               index === activeSlide ? "scale-100 opacity-100" : "scale-105 opacity-0"
             }`}
             width={1920}

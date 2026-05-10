@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { PageHero } from "@/components/site/PageHero";
 import { TourCard } from "@/components/site/TourCard";
+import { SEO, siteUrl } from "@/components/site/SEO";
 import { whatsappUrl } from "@/data/tourData";
 import { usePublicContent } from "@/hooks/use-public-content";
 import heroZanzibar from "@/assets/hero-zanzibar.jpg";
@@ -29,6 +30,24 @@ const Tours = () => {
 
   return (
     <SiteLayout>
+      <SEO
+        title="Zanzibar Tours & Experiences"
+        description="Explore Zanzibar beach tours, cultural tours, wildlife experiences, and local packages with easy booking support."
+        path="/tours"
+        image={heroZanzibar}
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Zanzibar Tours & Experiences",
+          url: siteUrl("/tours"),
+          itemListElement: allTours.slice(0, 12).map((tour, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: tour.name,
+            url: siteUrl(`/tours/${tour.id}`),
+          })),
+        }}
+      />
       <PageHero
         image={heroZanzibar}
         title="Tours & Experiences"

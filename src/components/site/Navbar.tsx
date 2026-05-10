@@ -51,7 +51,7 @@ export const Navbar = () => {
             "grid h-12 w-12 place-items-center overflow-hidden rounded-full border shadow-card-luxury transition-colors",
             scrolled ? "border-accent/40 bg-primary" : "border-accent/40 bg-white/14 backdrop-blur"
           )}>
-            <img src={logo} alt="Green Star Island Tour & Safari logo" className="h-12 w-12 rounded-full object-cover" />
+            <img src={logo} alt="Green Star Island Tour & Safari logo" loading="eager" decoding="async" className="h-12 w-12 rounded-full object-cover" />
           </div>
           <span className="leading-none">
             <span className={cn(

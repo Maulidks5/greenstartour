@@ -14,7 +14,7 @@ export const Footer = () => {
           <div>
             <div className="mb-5 flex items-center gap-3">
               <div className="grid h-14 w-14 place-items-center overflow-hidden rounded-full border border-accent/40 bg-primary shadow-gold">
-                <img src={logo} alt="Green Star Island Tour & Safari logo" className="h-12 w-12 rounded-full object-cover" />
+                <img src={logo} alt="Green Star Island Tour & Safari logo" loading="lazy" decoding="async" className="h-12 w-12 rounded-full object-cover" />
               </div>
               <span className="leading-none">
                 <span className="block font-display text-2xl font-semibold">Green Star</span>

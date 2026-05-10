@@ -2,11 +2,18 @@ import { CheckCircle2 } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { PageHero } from "@/components/site/PageHero";
 import { FinalBookingCTA } from "@/components/site/CtaSections";
+import { SEO } from "@/components/site/SEO";
 import aboutImg from "@/assets/about-zanzibar.jpg";
 import heroImg from "@/assets/hero-zanzibar.jpg";
 
 const AboutPage = () => (
   <SiteLayout>
+    <SEO
+      title="About Green Star Island Tour & Safari"
+      description="Meet the local Zanzibar team helping guests book tours, hotels, transport, and Tanzania safari extensions."
+      path="/about"
+      image={aboutImg}
+    />
     <PageHero
       image={aboutImg}
       title="About Us"
@@ -34,7 +41,7 @@ const AboutPage = () => (
             ))}
           </div>
         </div>
-        <img src={heroImg} alt="Zanzibar luxury travel" className="h-full min-h-[420px] rounded-2xl object-cover shadow-luxury" />
+        <img src={heroImg} alt="Zanzibar luxury travel" loading="lazy" decoding="async" className="h-full min-h-[420px] rounded-2xl object-cover shadow-luxury" />
       </div>
     </section>
     <FinalBookingCTA />

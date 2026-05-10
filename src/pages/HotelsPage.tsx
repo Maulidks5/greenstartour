@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { PageHero } from "@/components/site/PageHero";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { SectionHeader } from "@/components/site/SectionHeader";
+import { SEO, siteUrl } from "@/components/site/SEO";
 import { whatsappMessageUrl } from "@/data/tourData";
 import { usePublicContent } from "@/hooks/use-public-content";
 import heroImg from "@/assets/dest-kendwa.jpg";
@@ -13,6 +14,24 @@ const HotelsPage = () => {
 
   return (
     <SiteLayout>
+      <SEO
+        title="Zanzibar Hotel Booking"
+        description="Choose Zanzibar hotels, beach stays, villas, and city hotels with simple booking support from Green Star."
+        path="/hotels"
+        image={heroImg}
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Zanzibar Hotels",
+          url: siteUrl("/hotels"),
+          itemListElement: hotels.slice(0, 12).map((hotel, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: hotel.name,
+            url: siteUrl(`/hotels/${hotel.id}`),
+          })),
+        }}
+      />
       <PageHero
         image={heroImg}
         title="Choose Your Hotel"
@@ -47,7 +66,7 @@ const HotelsPage = () => {
               <article key={hotel.id} className="overflow-hidden rounded-2xl border border-border/70 bg-white shadow-card-luxury transition-all duration-300 hover:-translate-y-1 hover:shadow-luxury">
                 <Link to={`/hotels/${hotel.id}`} className="block">
                   <div className="aspect-[16/11] overflow-hidden">
-                    <img src={hotel.image} alt={hotel.name} className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" />
+                    <img src={hotel.image} alt={hotel.name} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" />
                   </div>
                 </Link>
                 <div className="p-5">

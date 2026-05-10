@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { PageHero } from "@/components/site/PageHero";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { SectionHeader } from "@/components/site/SectionHeader";
+import { SEO, siteUrl } from "@/components/site/SEO";
 import { whatsappMessageUrl } from "@/data/tourData";
 import { postPublicForm } from "@/lib/publicApi";
 import { formatCurrency, usePublicContent } from "@/hooks/use-public-content";
@@ -54,6 +55,30 @@ const TransportPage = () => {
 
   return (
     <SiteLayout>
+      <SEO
+        title="Zanzibar Transport Booking"
+        description="Book Zanzibar airport transfers, hotel transfers, private drivers, and transport routes with clear pricing."
+        path="/transport"
+        image={heroImg}
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: "Zanzibar Transport Booking",
+          serviceType: "Airport transfers and private transport",
+          areaServed: "Zanzibar, Tanzania",
+          provider: {
+            "@type": "TravelAgency",
+            name: "Green Star Island Tour & Safari",
+            url: siteUrl("/"),
+          },
+          offers: transportRoutes.slice(0, 8).map((route) => ({
+            "@type": "Offer",
+            name: `${route.pickupLocation} to ${route.dropoffLocation}`,
+            price: route.basePrice,
+            priceCurrency: siteSettings.currencySymbol === "$" ? "USD" : siteSettings.currencySymbol === "€" ? "EUR" : undefined,
+          })),
+        }}
+      />
       <PageHero
         image={heroImg}
         title="Transport Booking"
@@ -78,7 +103,7 @@ const TransportPage = () => {
                   }`}
                 >
                   <div className="aspect-[16/10] overflow-hidden">
-                    <img src={service.image} alt={service.title} className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" />
+                    <img src={service.image} alt={service.title} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" />
                   </div>
                   <div className="p-5">
                     <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl gradient-ocean">

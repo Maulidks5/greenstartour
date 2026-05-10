@@ -20,7 +20,7 @@ export const TourCategories = () => {
               to={`/tours?category=${category.key}`}
               className="group relative min-h-[220px] overflow-hidden rounded-2xl shadow-card-luxury"
             >
-              <img src={category.image} alt={category.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <img src={category.image} alt={category.title} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/35 to-transparent" />
               <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
                 <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-white/15 backdrop-blur transition-transform group-hover:translate-x-1">

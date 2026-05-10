@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ResourceController;
 use App\Http\Controllers\PublicContentController;
 use App\Http\Controllers\PublicPageController;
 use App\Http\Controllers\PublicSubmissionController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/login', '/admin/login')->name('login');
@@ -24,6 +25,8 @@ Route::middleware('throttle:public-forms')->group(function () {
     Route::post('/testimonials', [PublicSubmissionController::class, 'testimonial'])->name('public.testimonial');
 });
 Route::get('/api/public-content', PublicContentController::class)->name('api.public-content');
+
+Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:admin-actions'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');

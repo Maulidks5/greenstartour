@@ -20,7 +20,7 @@ export const FeaturedTours = () => {
           {featuredTours.map((tour) => (
             <article key={tour.id} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/70 bg-white shadow-card-luxury transition-all duration-300 hover:-translate-y-1 hover:shadow-luxury">
               <Link to={`/tours/${tour.id}`} className="relative block aspect-[16/9] overflow-hidden bg-secondary">
-                <img src={tour.image} alt={tour.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img src={tour.image} alt={tour.name} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/45 via-transparent to-transparent" />
                 <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-extrabold uppercase tracking-[0.08em] text-primary">
                   Popular
