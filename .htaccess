@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+    DirectoryIndex index.php
+
+    Options -Indexes
+    RewriteEngine On
+
+    RewriteRule ^\.env$ - [F,L]
+    RewriteRule ^(app|bootstrap|config|database|resources|routes|storage|vendor)(/|$) - [F,L]
+
+    RewriteRule ^$ public/index.php [L]
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>

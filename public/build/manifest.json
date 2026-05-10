@@ -1,0 +1,456 @@
+{
+  "_CtaSections-Dlz_F2i8.js": {
+    "file": "assets/CtaSections-Dlz_F2i8.js",
+    "name": "CtaSections",
+    "imports": [
+      "resources/js/public.tsx",
+      "_SiteLayout-DSOo7XWl.js"
+    ]
+  },
+  "_PageHero-uefUpCzb.js": {
+    "file": "assets/PageHero-uefUpCzb.js",
+    "name": "PageHero",
+    "imports": [
+      "resources/js/public.tsx"
+    ]
+  },
+  "_SectionHeader-DeBn5B4T.js": {
+    "file": "assets/SectionHeader-DeBn5B4T.js",
+    "name": "SectionHeader",
+    "imports": [
+      "resources/js/public.tsx",
+      "_index-EE3C2evh.js"
+    ]
+  },
+  "_SiteLayout-DSOo7XWl.js": {
+    "file": "assets/SiteLayout-DSOo7XWl.js",
+    "name": "SiteLayout",
+    "imports": [
+      "resources/js/public.tsx",
+      "_index-EE3C2evh.js"
+    ],
+    "assets": [
+      "assets/green-star-logo-6l6Eprp3.png"
+    ]
+  },
+  "_TourCard-PxaetUlR.js": {
+    "file": "assets/TourCard-PxaetUlR.js",
+    "name": "TourCard",
+    "imports": [
+      "resources/js/public.tsx",
+      "_SiteLayout-DSOo7XWl.js",
+      "_clock-BB9Wi7_a.js",
+      "_star-DMklzdly.js"
+    ]
+  },
+  "_bed-double-BVMJQDZn.js": {
+    "file": "assets/bed-double-BVMJQDZn.js",
+    "name": "bed-double",
+    "imports": [
+      "resources/js/public.tsx"
+    ]
+  },
+  "_calendar-CEHWV5j5.js": {
+    "file": "assets/calendar-CEHWV5j5.js",
+    "name": "calendar",
+    "imports": [
+      "resources/js/public.tsx"
+    ]
+  },
+  "_car-C45IQ2RG.js": {
+    "file": "assets/car-C45IQ2RG.js",
+    "name": "car",
+    "imports": [
+      "resources/js/public.tsx"
+    ]
+  },
+  "_check-C2AeAnSm.js": {
+    "file": "assets/check-C2AeAnSm.js",
+    "name": "check",
+    "imports": [
+      "resources/js/public.tsx"
+    ]
+  },
+  "_circle-check-C5o8PhMt.js": {
+    "file": "assets/circle-check-C5o8PhMt.js",
+    "name": "circle-check",
+    "imports": [
+      "resources/js/public.tsx"
+    ]
+  },
+  "_clock-BB9Wi7_a.js": {
+    "file": "assets/clock-BB9Wi7_a.js",
+    "name": "clock",
+    "imports": [
+      "resources/js/public.tsx"
+    ]
+  },
+  "_dateFormat-CYl1Ihjl.js": {
+    "file": "assets/dateFormat-CYl1Ihjl.js",
+    "name": "dateFormat"
+  },
+  "_index-!~{003}~.js": {
+    "file": "assets/index-JbaPi1A6.css",
+    "src": "_index-!~{003}~.js"
+  },
+  "_index-EE3C2evh.js": {
+    "file": "assets/index-EE3C2evh.js",
+    "name": "index",
+    "css": [
+      "assets/index-JbaPi1A6.css"
+    ]
+  },
+  "_input-CnBN0J_7.js": {
+    "file": "assets/input-CnBN0J_7.js",
+    "name": "input",
+    "imports": [
+      "resources/js/public.tsx",
+      "_index-EE3C2evh.js"
+    ]
+  },
+  "_publicApi-Di5ymlts.js": {
+    "file": "assets/publicApi-Di5ymlts.js",
+    "name": "publicApi",
+    "imports": [
+      "resources/js/public.tsx",
+      "_index-EE3C2evh.js"
+    ]
+  },
+  "_send-CqyC5KkG.js": {
+    "file": "assets/send-CqyC5KkG.js",
+    "name": "send",
+    "imports": [
+      "resources/js/public.tsx"
+    ]
+  },
+  "_star-DMklzdly.js": {
+    "file": "assets/star-DMklzdly.js",
+    "name": "star",
+    "imports": [
+      "resources/js/public.tsx"
+    ]
+  },
+  "_users-CopSf7GM.js": {
+    "file": "assets/users-CopSf7GM.js",
+    "name": "users",
+    "imports": [
+      "resources/js/public.tsx"
+    ]
+  },
+  "resources/js/admin.tsx": {
+    "file": "assets/admin-CyGToMnm.js",
+    "name": "admin",
+    "src": "resources/js/admin.tsx",
+    "isEntry": true,
+    "imports": [
+      "_index-EE3C2evh.js",
+      "_dateFormat-CYl1Ihjl.js"
+    ]
+  },
+  "resources/js/public.tsx": {
+    "file": "assets/public-wf0batXe.js",
+    "name": "public",
+    "src": "resources/js/public.tsx",
+    "isEntry": true,
+    "imports": [
+      "_index-EE3C2evh.js"
+    ],
+    "dynamicImports": [
+      "src/pages/Index.tsx",
+      "src/pages/NotFound.tsx",
+      "src/pages/Tours.tsx",
+      "src/pages/TourDetails.tsx",
+      "src/pages/AboutPage.tsx",
+      "src/pages/GalleryPage.tsx",
+      "src/pages/ContactPage.tsx",
+      "src/pages/PartnershipPage.tsx",
+      "src/pages/SafariPackages.tsx",
+      "src/pages/HotelsPage.tsx",
+      "src/pages/HotelDetails.tsx",
+      "src/pages/TransportPage.tsx"
+    ],
+    "assets": [
+      "assets/hero-zanzibar-KQXG9Ndo.jpg",
+      "assets/about-zanzibar-DjlUt6VG.jpg",
+      "assets/tour-mnemba-D4lI06A1.jpg",
+      "assets/tour-safari-blue-CS863-J5.jpg",
+      "assets/tour-stone-town-CvTcDxYG.jpg",
+      "assets/tour-jozani-8a5jcZJx.jpg",
+      "assets/tour-nungwi-CL7x1XOE.jpg",
+      "assets/dest-kendwa-xXmqVd_O.jpg",
+      "assets/dest-paje-D8wKqVge.jpg",
+      "assets/dest-matemwe-CGIVUEe5.jpg",
+      "assets/dest-jambiani-C1QEDs7r.jpg",
+      "assets/gallery-1-Cgop8Mk9.jpg",
+      "assets/gallery-2-BUdaa0xr.jpg",
+      "assets/gallery-3-E32Cblg1.jpg",
+      "assets/gallery-4-BiNUO_1O.jpg",
+      "assets/gallery-5-BbqVq2sc.jpg",
+      "assets/gallery-6-Cp4p5H_e.jpg"
+    ]
+  },
+  "src/assets/about-zanzibar.jpg": {
+    "file": "assets/about-zanzibar-DjlUt6VG.jpg",
+    "src": "src/assets/about-zanzibar.jpg"
+  },
+  "src/assets/dest-jambiani.jpg": {
+    "file": "assets/dest-jambiani-C1QEDs7r.jpg",
+    "src": "src/assets/dest-jambiani.jpg"
+  },
+  "src/assets/dest-kendwa.jpg": {
+    "file": "assets/dest-kendwa-xXmqVd_O.jpg",
+    "src": "src/assets/dest-kendwa.jpg"
+  },
+  "src/assets/dest-matemwe.jpg": {
+    "file": "assets/dest-matemwe-CGIVUEe5.jpg",
+    "src": "src/assets/dest-matemwe.jpg"
+  },
+  "src/assets/dest-paje.jpg": {
+    "file": "assets/dest-paje-D8wKqVge.jpg",
+    "src": "src/assets/dest-paje.jpg"
+  },
+  "src/assets/gallery-1.jpg": {
+    "file": "assets/gallery-1-Cgop8Mk9.jpg",
+    "src": "src/assets/gallery-1.jpg"
+  },
+  "src/assets/gallery-2.jpg": {
+    "file": "assets/gallery-2-BUdaa0xr.jpg",
+    "src": "src/assets/gallery-2.jpg"
+  },
+  "src/assets/gallery-3.jpg": {
+    "file": "assets/gallery-3-E32Cblg1.jpg",
+    "src": "src/assets/gallery-3.jpg"
+  },
+  "src/assets/gallery-4.jpg": {
+    "file": "assets/gallery-4-BiNUO_1O.jpg",
+    "src": "src/assets/gallery-4.jpg"
+  },
+  "src/assets/gallery-5.jpg": {
+    "file": "assets/gallery-5-BbqVq2sc.jpg",
+    "src": "src/assets/gallery-5.jpg"
+  },
+  "src/assets/gallery-6.jpg": {
+    "file": "assets/gallery-6-Cp4p5H_e.jpg",
+    "src": "src/assets/gallery-6.jpg"
+  },
+  "src/assets/green-star-logo.png": {
+    "file": "assets/green-star-logo-6l6Eprp3.png",
+    "src": "src/assets/green-star-logo.png"
+  },
+  "src/assets/hero-zanzibar.jpg": {
+    "file": "assets/hero-zanzibar-KQXG9Ndo.jpg",
+    "src": "src/assets/hero-zanzibar.jpg"
+  },
+  "src/assets/tour-jozani.jpg": {
+    "file": "assets/tour-jozani-8a5jcZJx.jpg",
+    "src": "src/assets/tour-jozani.jpg"
+  },
+  "src/assets/tour-mnemba.jpg": {
+    "file": "assets/tour-mnemba-D4lI06A1.jpg",
+    "src": "src/assets/tour-mnemba.jpg"
+  },
+  "src/assets/tour-nungwi.jpg": {
+    "file": "assets/tour-nungwi-CL7x1XOE.jpg",
+    "src": "src/assets/tour-nungwi.jpg"
+  },
+  "src/assets/tour-safari-blue.jpg": {
+    "file": "assets/tour-safari-blue-CS863-J5.jpg",
+    "src": "src/assets/tour-safari-blue.jpg"
+  },
+  "src/assets/tour-stone-town.jpg": {
+    "file": "assets/tour-stone-town-CvTcDxYG.jpg",
+    "src": "src/assets/tour-stone-town.jpg"
+  },
+  "src/pages/AboutPage.tsx": {
+    "file": "assets/AboutPage-CRVXPWrS.js",
+    "name": "AboutPage",
+    "src": "src/pages/AboutPage.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/public.tsx",
+      "_SiteLayout-DSOo7XWl.js",
+      "_PageHero-uefUpCzb.js",
+      "_CtaSections-Dlz_F2i8.js",
+      "_circle-check-C5o8PhMt.js",
+      "_index-EE3C2evh.js"
+    ]
+  },
+  "src/pages/ContactPage.tsx": {
+    "file": "assets/ContactPage-DuEygzRy.js",
+    "name": "ContactPage",
+    "src": "src/pages/ContactPage.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/public.tsx",
+      "_SiteLayout-DSOo7XWl.js",
+      "_input-CnBN0J_7.js",
+      "_publicApi-Di5ymlts.js",
+      "_SectionHeader-DeBn5B4T.js",
+      "_index-EE3C2evh.js",
+      "_send-CqyC5KkG.js",
+      "_PageHero-uefUpCzb.js"
+    ]
+  },
+  "src/pages/GalleryPage.tsx": {
+    "file": "assets/GalleryPage-D_kTyHaX.js",
+    "name": "GalleryPage",
+    "src": "src/pages/GalleryPage.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/public.tsx",
+      "_SiteLayout-DSOo7XWl.js",
+      "_PageHero-uefUpCzb.js",
+      "_CtaSections-Dlz_F2i8.js",
+      "_index-EE3C2evh.js"
+    ]
+  },
+  "src/pages/HotelDetails.tsx": {
+    "file": "assets/HotelDetails-fcuWFsv2.js",
+    "name": "HotelDetails",
+    "src": "src/pages/HotelDetails.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/public.tsx",
+      "_index-EE3C2evh.js",
+      "_SiteLayout-DSOo7XWl.js",
+      "_input-CnBN0J_7.js",
+      "_publicApi-Di5ymlts.js",
+      "_dateFormat-CYl1Ihjl.js",
+      "_bed-double-BVMJQDZn.js",
+      "_star-DMklzdly.js",
+      "_check-C2AeAnSm.js",
+      "_calendar-CEHWV5j5.js",
+      "_users-CopSf7GM.js"
+    ]
+  },
+  "src/pages/HotelsPage.tsx": {
+    "file": "assets/HotelsPage-BYRhNhoM.js",
+    "name": "HotelsPage",
+    "src": "src/pages/HotelsPage.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/public.tsx",
+      "_SiteLayout-DSOo7XWl.js",
+      "_PageHero-uefUpCzb.js",
+      "_SectionHeader-DeBn5B4T.js",
+      "_star-DMklzdly.js",
+      "_index-EE3C2evh.js"
+    ]
+  },
+  "src/pages/Index.tsx": {
+    "file": "assets/Index-DUYwZXay.js",
+    "name": "Index",
+    "src": "src/pages/Index.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/public.tsx",
+      "_SiteLayout-DSOo7XWl.js",
+      "_index-EE3C2evh.js",
+      "_circle-check-C5o8PhMt.js",
+      "_bed-double-BVMJQDZn.js",
+      "_car-C45IQ2RG.js",
+      "_SectionHeader-DeBn5B4T.js",
+      "_input-CnBN0J_7.js",
+      "_publicApi-Di5ymlts.js",
+      "_send-CqyC5KkG.js",
+      "_star-DMklzdly.js",
+      "_CtaSections-Dlz_F2i8.js"
+    ]
+  },
+  "src/pages/NotFound.tsx": {
+    "file": "assets/NotFound-C7kPpFV7.js",
+    "name": "NotFound",
+    "src": "src/pages/NotFound.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/public.tsx",
+      "_index-EE3C2evh.js"
+    ]
+  },
+  "src/pages/PartnershipPage.tsx": {
+    "file": "assets/PartnershipPage-DgIz0i9t.js",
+    "name": "PartnershipPage",
+    "src": "src/pages/PartnershipPage.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/public.tsx",
+      "_SiteLayout-DSOo7XWl.js",
+      "_input-CnBN0J_7.js",
+      "_publicApi-Di5ymlts.js",
+      "_PageHero-uefUpCzb.js",
+      "_index-EE3C2evh.js",
+      "_send-CqyC5KkG.js"
+    ]
+  },
+  "src/pages/SafariPackages.tsx": {
+    "file": "assets/SafariPackages-GbW6JJ6M.js",
+    "name": "SafariPackages",
+    "src": "src/pages/SafariPackages.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/public.tsx",
+      "_SiteLayout-DSOo7XWl.js",
+      "_PageHero-uefUpCzb.js",
+      "_TourCard-PxaetUlR.js",
+      "_index-EE3C2evh.js",
+      "_clock-BB9Wi7_a.js",
+      "_star-DMklzdly.js"
+    ]
+  },
+  "src/pages/TourDetails.tsx": {
+    "file": "assets/TourDetails-DGK332Lf.js",
+    "name": "TourDetails",
+    "src": "src/pages/TourDetails.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/public.tsx",
+      "_index-EE3C2evh.js",
+      "_SiteLayout-DSOo7XWl.js",
+      "_input-CnBN0J_7.js",
+      "_publicApi-Di5ymlts.js",
+      "_TourCard-PxaetUlR.js",
+      "_dateFormat-CYl1Ihjl.js",
+      "_clock-BB9Wi7_a.js",
+      "_star-DMklzdly.js",
+      "_check-C2AeAnSm.js",
+      "_calendar-CEHWV5j5.js"
+    ]
+  },
+  "src/pages/Tours.tsx": {
+    "file": "assets/Tours-Ad3Z9xUp.js",
+    "name": "Tours",
+    "src": "src/pages/Tours.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/public.tsx",
+      "_index-EE3C2evh.js",
+      "_input-CnBN0J_7.js",
+      "_SiteLayout-DSOo7XWl.js",
+      "_PageHero-uefUpCzb.js",
+      "_TourCard-PxaetUlR.js",
+      "_clock-BB9Wi7_a.js",
+      "_star-DMklzdly.js"
+    ]
+  },
+  "src/pages/TransportPage.tsx": {
+    "file": "assets/TransportPage-Byz9k-s1.js",
+    "name": "TransportPage",
+    "src": "src/pages/TransportPage.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/public.tsx",
+      "_index-EE3C2evh.js",
+      "_SiteLayout-DSOo7XWl.js",
+      "_input-CnBN0J_7.js",
+      "_publicApi-Di5ymlts.js",
+      "_PageHero-uefUpCzb.js",
+      "_SectionHeader-DeBn5B4T.js",
+      "_dateFormat-CYl1Ihjl.js",
+      "_car-C45IQ2RG.js",
+      "_send-CqyC5KkG.js",
+      "_calendar-CEHWV5j5.js",
+      "_clock-BB9Wi7_a.js",
+      "_users-CopSf7GM.js"
+    ]
+  }
+}

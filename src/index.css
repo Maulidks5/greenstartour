@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Luxury Zanzibar palette: ocean, sand, gold, subtle island green */
+    --background: 200 40% 99%;
+    --foreground: 210 60% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 60% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 60% 12%;
+
+    /* Deep ocean blue */
+    --primary: 205 75% 22%;
+    --primary-foreground: 40 50% 96%;
+    --primary-glow: 195 80% 45%;
+
+    /* Soft sand */
+    --secondary: 38 45% 94%;
+    --secondary-foreground: 205 75% 22%;
+
+    --muted: 200 30% 96%;
+    --muted-foreground: 210 20% 45%;
+
+    /* Soft gold accent */
+    --accent: 39 73% 55%;
+    --accent-foreground: 210 60% 12%;
+    --accent-soft: 42 70% 88%;
+
+    /* Green Star accent */
+    --island-green: 148 54% 34%;
+    --island-green-soft: 146 42% 92%;
+    --island-green-deep: 152 58% 20%;
+
+    /* Tropical turquoise */
+    --turquoise: 180 65% 55%;
+    --turquoise-deep: 190 75% 40%;
+
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 200 25% 89%;
+    --input: 200 25% 90%;
+    --ring: 148 54% 34%;
+
+    --radius: 1rem;
+
+    /* Gradients */
+    --gradient-ocean: linear-gradient(135deg, hsl(205 75% 20%), hsl(190 72% 35%), hsl(148 54% 34%));
+    --gradient-sunset: linear-gradient(135deg, hsl(25 90% 65%), hsl(38 85% 60%), hsl(15 80% 60%));
+    --gradient-gold: linear-gradient(135deg, hsl(44 84% 70%), hsl(39 76% 55%), hsl(148 42% 36%));
+    --gradient-green: linear-gradient(135deg, hsl(152 58% 20%), hsl(148 54% 34%), hsl(39 73% 55%));
+    --gradient-glass: linear-gradient(135deg, hsla(0 0% 100% / 0.18), hsla(0 0% 100% / 0.06));
+    --gradient-hero-overlay: linear-gradient(180deg, hsla(205 75% 12% / 0.35) 0%, hsla(205 75% 12% / 0.55) 100%);
+
+    /* Shadows */
+    --shadow-luxury: 0 30px 80px -20px hsla(205 75% 22% / 0.25);
+    --shadow-card: 0 10px 40px -15px hsla(205 50% 30% / 0.18);
+    --shadow-gold: 0 10px 30px -10px hsla(39 73% 55% / 0.4);
+    --shadow-green: 0 16px 45px -20px hsla(148 54% 34% / 0.45);
+    --shadow-glass: 0 8px 32px hsla(205 50% 20% / 0.12);
+
+    /* Transitions */
+    --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
+    --transition-smooth: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Manrope', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  button, a, input, select, textarea {
+    -webkit-tap-highlight-color: transparent;
+  }
+  input, select, textarea {
+    font-size: 16px;
+  }
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: var(--gradient-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid hsla(0 0% 100% / 0.2);
+  }
+  .glass-dark {
+    background: hsla(205 75% 12% / 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid hsla(0 0% 100% / 0.12);
+  }
+  .glass-card {
+    background: hsla(0 0% 100% / 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid hsla(0 0% 100% / 0.5);
+  }
+  .gradient-ocean { background: var(--gradient-ocean); }
+  .gradient-gold { background: var(--gradient-gold); }
+  .gradient-green { background: var(--gradient-green); }
+  .gradient-sunset { background: var(--gradient-sunset); }
+  .text-gradient-ocean {
+    background: var(--gradient-ocean);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .text-gradient-gold {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .shadow-luxury { box-shadow: var(--shadow-luxury); }
+  .shadow-card-luxury { box-shadow: var(--shadow-card); }
+  .shadow-gold { box-shadow: var(--shadow-gold); }
+  .shadow-green { box-shadow: var(--shadow-green); }
+
+  .text-island-green { color: hsl(var(--island-green)); }
+  .bg-island-green { background-color: hsl(var(--island-green)); }
+  .bg-island-green-soft { background-color: hsl(var(--island-green-soft)); }
+  .border-island-green { border-color: hsl(var(--island-green)); }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: var(--transition-smooth);
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer components {
+  .admin-label {
+    @apply mb-2 block text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground;
+  }
+
+  .admin-input {
+    @apply min-h-11 w-full rounded-xl border border-input bg-white px-3 text-base text-primary outline-none transition-colors focus:border-[hsl(var(--island-green))] focus:ring-2 focus:ring-[hsl(var(--island-green))]/20 md:text-sm;
+  }
+
+  .mobile-touch {
+    @apply min-h-12;
+  }
+}

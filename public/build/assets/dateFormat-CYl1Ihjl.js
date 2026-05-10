@@ -1,0 +1,1 @@
+const a=t=>{if(!t)return"";const e=t.includes("T")?t:`${t}T00:00:00`,n=new Date(e);return Number.isNaN(n.getTime())?t:new Intl.DateTimeFormat("en-GB",{weekday:"short",day:"2-digit",month:"short",year:"numeric"}).format(n)},o=()=>{const t=new Date,e=t.getTimezoneOffset();return new Date(t.getTime()-e*60*1e3).toISOString().slice(0,10)};export{a as f,o as t};
