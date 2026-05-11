@@ -78,13 +78,11 @@ export const Footer = () => {
             <a href="#" className="hover:text-white">Terms</a>
             <a href="#" className="hover:text-white">Cookies</a>
             <a
-              href="/admin/login"
-              onClick={(event) => {
-                event.preventDefault();
-                window.location.assign("/admin/login");
-              }}
-              aria-label="Admin login"
-              title="Admin login"
+              href="/admin"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Admin portal"
+              title="Admin portal"
               className="inline-grid h-8 w-8 place-items-center rounded-full border border-white/15 bg-white/5 text-white/55 transition-colors hover:border-accent/60 hover:bg-accent hover:text-primary"
             >
               <LockKeyhole className="h-3.5 w-3.5" />

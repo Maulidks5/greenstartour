@@ -754,12 +754,15 @@ function StatusBadge({ status }: { status?: string }) {
     pending: "bg-amber-50 text-amber-700",
     contacted: "bg-sky-50 text-sky-700",
     replied: "bg-sky-50 text-sky-700",
+    responded: "bg-sky-50 text-sky-700",
     inactive: "bg-slate-100 text-slate-600",
     closed: "bg-slate-100 text-slate-600",
     cancelled: "bg-red-50 text-red-700",
   };
 
-  return <span className={`inline-flex rounded-full px-3 py-1 text-xs font-bold capitalize ${styles[current] ?? "bg-accent/15 text-primary"}`}>{current}</span>;
+  const label = current === "responded" ? "Replied" : current;
+
+  return <span className={`inline-flex rounded-full px-3 py-1 text-xs font-bold capitalize ${styles[current] ?? "bg-accent/15 text-primary"}`}>{label}</span>;
 }
 
 function RecordDetails({ record }: { record: RecordItem }) {

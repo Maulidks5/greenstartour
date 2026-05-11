@@ -452,13 +452,17 @@ class ResourceController extends Controller
     public function inquiries(): Response
     {
         return $this->resource('Inquiries', 'inquiries', Inquiry::latest()->get(), [
-            ['name' => 'status', 'label' => 'Status', 'type' => 'select', 'options' => ['pending', 'replied', 'closed']],
+            ['name' => 'status', 'label' => 'Status', 'type' => 'select', 'options' => [
+                ['id' => 'pending', 'name' => 'Pending'],
+                ['id' => 'responded', 'name' => 'Replied'],
+                ['id' => 'closed', 'name' => 'Closed'],
+            ]],
         ], ['full_name', 'email', 'whatsapp_number', 'subject', 'status'], true);
     }
 
     public function updateInquiry(Request $request, Inquiry $inquiry): RedirectResponse
     {
-        $inquiry->update($request->validate(['status' => ['required', 'in:pending,replied,closed']]));
+        $inquiry->update($request->validate(['status' => ['required', 'in:pending,responded,closed']]));
 
         return back()->with('success', 'Inquiry status updated.');
     }

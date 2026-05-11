@@ -23,7 +23,7 @@ export const Hero = () => {
   }, [activeSlide, heroSlides.length]);
 
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden">
+    <section className="relative flex min-h-[92svh] items-end overflow-hidden md:min-h-screen md:items-center">
       <div className="absolute inset-0 bg-primary">
         {heroSlides.map((item, index) => (
           <img
@@ -32,45 +32,48 @@ export const Hero = () => {
             alt={item.title}
             loading={index === 0 ? "eager" : "lazy"}
             decoding="async"
-            className={`absolute inset-0 h-full w-full object-contain object-center transition-all duration-1000 md:object-cover ${
+            className={`absolute inset-0 h-full w-full object-cover object-center transition-all duration-1000 ${
               index === activeSlide ? "scale-100 opacity-100" : "scale-105 opacity-0"
             }`}
             width={1920}
             height={1080}
           />
         ))}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/78 via-primary/48 to-island-deep/20" />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/25 via-transparent to-island-deep/72" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/45 via-primary/20 to-transparent md:from-primary/78 md:via-primary/48 md:to-island-deep/20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-island-deep/78 md:from-primary/25 md:to-island-deep/72" />
       </div>
 
-      <div className="container relative z-10 pb-10 pt-36 sm:pb-16 sm:pt-40 md:pb-20 md:pt-48">
-        <div className="max-w-2xl">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur animate-fade-in sm:mb-5">
+      <div className="container relative z-10 pb-7 pt-28 sm:pb-16 sm:pt-40 md:pb-20 md:pt-48">
+        <div className="max-w-xl md:max-w-2xl">
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-2 backdrop-blur animate-fade-in sm:mb-5 sm:px-4">
             <span className="h-2 w-2 rounded-full bg-island-green animate-pulse" />
-            <span className="text-xs font-bold uppercase tracking-[0.16em] text-white/90">{slide.label}</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/90 sm:text-xs sm:tracking-[0.16em]">{slide.label}</span>
           </div>
 
-          <h1 className="font-display text-[2.35rem] font-semibold leading-[1.08] text-white sm:text-5xl lg:text-6xl animate-fade-in-up">
+          <h1 className="font-display text-[2rem] font-semibold leading-[1.05] text-white sm:text-5xl lg:text-6xl animate-fade-in-up">
             Explore Zanzibar with Green Star Tour
           </h1>
 
-          <p className="mt-4 max-w-xl text-base leading-7 text-white/90 sm:mt-5 sm:text-lg sm:leading-8 animate-fade-in-up [animation-delay:200ms]">
+          <p className="mt-3 max-w-xs text-sm font-medium leading-6 text-white/90 sm:hidden animate-fade-in-up [animation-delay:200ms]">
+            Tours, safaris, hotels & transport.
+          </p>
+          <p className="mt-4 hidden max-w-xl text-base leading-7 text-white/90 sm:mt-5 sm:block sm:text-lg sm:leading-8 animate-fade-in-up [animation-delay:200ms]">
             Tours, Safari, Hotels, Transportation, and Local Experiences made simple and reliable.
           </p>
 
-          <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row animate-fade-in-up [animation-delay:400ms]">
-            <Button variant="green" size="xl" className="w-full sm:w-auto" asChild>
+          <div className="mt-5 flex gap-2 sm:mt-8 sm:flex-row sm:gap-3 animate-fade-in-up [animation-delay:400ms]">
+            <Button variant="green" size="lg" className="flex-1 rounded-full px-4 sm:flex-none sm:px-8" asChild>
               <Link to="/contact">Book Now <ArrowRight className="h-4 w-4" /></Link>
             </Button>
-            <Button variant="glass" size="xl" className="w-full sm:w-auto" asChild>
+            <Button variant="glass" size="xl" className="hidden sm:inline-flex sm:w-auto" asChild>
               <Link to="/tours">View Packages</Link>
             </Button>
-            <Button variant="whatsapp" size="xl" className="w-full sm:w-auto" asChild>
+            <Button variant="whatsapp" size="lg" className="flex-1 rounded-full px-4 sm:flex-none sm:px-8" asChild>
               <a href={whatsappUrl} target="_blank" rel="noreferrer"><MessageCircle className="h-4 w-4" /> WhatsApp Us</a>
             </Button>
           </div>
 
-          <div className="mt-6 grid gap-2 text-sm font-semibold text-white/90 sm:mt-7 sm:grid-cols-3 sm:gap-3">
+          <div className="mt-6 hidden gap-2 text-sm font-semibold text-white/90 sm:mt-7 sm:grid sm:grid-cols-3 sm:gap-3">
             {["Tours & Safari", "Hotels", "Transport"].map((badge) => (
               <span key={badge} className="inline-flex items-center gap-2 rounded-xl bg-white/12 px-3 py-3 backdrop-blur">
                 <CheckCircle2 className="h-4 w-4 text-island-green" />
@@ -80,7 +83,7 @@ export const Hero = () => {
           </div>
         </div>
 
-        <div className="mt-8 flex gap-2">
+        <div className="mt-5 flex gap-2 sm:mt-8">
           {heroSlides.map((item, index) => (
             <button
               key={item.label}
@@ -94,7 +97,9 @@ export const Hero = () => {
           ))}
         </div>
 
-        <QuickBookingCard />
+        <div className="hidden md:block">
+          <QuickBookingCard />
+        </div>
       </div>
     </section>
   );
