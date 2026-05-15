@@ -2,6 +2,41 @@ import { Link } from "react-router-dom";
 import { Handshake, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { whatsappUrl } from "@/data/tourData";
+import { usePublicContent } from "@/hooks/use-public-content";
+
+export const ApprovedPartners = () => {
+  const { partners } = usePublicContent();
+
+  if (!partners.length) return null;
+
+  const marqueePartners = partners.length > 3 ? [...partners, ...partners] : partners;
+
+  return (
+    <section className="bg-background py-12">
+      <div className="container">
+        <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+          <div>
+            <div className="text-xs font-bold uppercase tracking-[0.22em] text-accent">Approved Partners</div>
+            <h2 className="mt-2 font-display text-3xl font-semibold text-primary md:text-4xl">Trusted by local travel partners.</h2>
+          </div>
+          <Button variant="outline" asChild>
+            <Link to="/partnership">Become a Partner</Link>
+          </Button>
+        </div>
+
+        <div className="overflow-hidden rounded-2xl border border-border/70 bg-white py-5 shadow-card-luxury">
+          <div className={partners.length > 3 ? "partners-marquee" : "flex flex-wrap justify-center gap-4 px-5"}>
+            {marqueePartners.map((partner, index) => (
+              <div key={`${partner.id}-${index}`} className="flex h-24 min-w-48 items-center justify-center rounded-xl border border-border/60 bg-secondary/25 px-6">
+                <img src={partner.logo} alt={`${partner.name} logo`} loading="lazy" className="max-h-14 max-w-36 object-contain" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 export const PartnershipCTA = () => (
   <section className="bg-secondary/45 py-16">

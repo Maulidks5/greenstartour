@@ -549,13 +549,21 @@ class ResourceController extends Controller
     public function partnershipRequests(): Response
     {
         return $this->resource('Partnership Requests', 'partnership-requests', PartnershipRequest::latest()->get(), [
-            ['name' => 'status', 'label' => 'Status', 'type' => 'select', 'options' => ['pending', 'contacted', 'approved', 'closed']],
-        ], ['full_name', 'company_name', 'partnership_type', 'whatsapp_number', 'status'], true);
+            ['name' => 'logo', 'label' => 'Partner Logo', 'type' => 'image'],
+            ['name' => 'status', 'label' => 'Status', 'type' => 'select', 'options' => ['pending', 'approved', 'rejected']],
+        ], ['logo', 'full_name', 'company_name', 'partnership_type', 'whatsapp_number', 'status'], true);
     }
 
     public function updatePartnershipRequest(Request $request, PartnershipRequest $partnershipRequest): RedirectResponse
     {
-        $partnershipRequest->update($request->validate(['status' => ['required', 'in:pending,contacted,approved,closed']]));
+        $data = $request->validate([
+            'logo' => ['nullable'],
+            'status' => ['required', 'in:pending,approved,rejected'],
+        ]);
+
+        $data['logo'] = $this->uploadedImagePath($request, 'logo', $partnershipRequest->logo);
+
+        $partnershipRequest->update($data);
 
         return back()->with('success', 'Partnership status updated.');
     }

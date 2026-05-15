@@ -95,6 +95,13 @@ type BackendTestimonial = {
   review: string;
 };
 
+type BackendPartner = {
+  id: number;
+  company_name?: string | null;
+  full_name: string;
+  logo?: string | null;
+};
+
 type BackendTransportService = {
   id: number;
   slug: string;
@@ -119,6 +126,7 @@ export type BackendContent = {
   hotels?: BackendHotel[];
   gallery?: BackendGallery[];
   testimonials?: BackendTestimonial[];
+  partners?: BackendPartner[];
   transportServices?: BackendTransportService[];
   transportRoutes?: BackendTransportRoute[];
 };
@@ -128,6 +136,11 @@ export type TransportServiceItem = (typeof fallbackTransportServices)[number];
 export type CategoryItem = (typeof fallbackCategories)[number];
 export type GalleryItem = (typeof fallbackGallery)[number];
 export type TestimonialItem = (typeof fallbackTestimonials)[number];
+export type PartnerItem = {
+  id: number;
+  name: string;
+  logo: string;
+};
 
 export type HeroSlideItem = {
   image: string;
@@ -358,6 +371,16 @@ const mapContent = (content?: BackendContent) => {
       }))
     : [...fallbackTestimonials];
 
+  const partners: PartnerItem[] = content?.partners?.length
+    ? content.partners
+        .filter((partner) => isManagedImage(partner.logo))
+        .map((partner) => ({
+          id: partner.id,
+          name: partner.company_name || partner.full_name,
+          logo: partner.logo!,
+        }))
+    : [];
+
   const transportServices = content?.transportServices?.length
     ? content.transportServices.map((service, index) => ({
         id: service.slug,
@@ -393,6 +416,7 @@ const mapContent = (content?: BackendContent) => {
     hotels,
     galleryImages,
     testimonials,
+    partners,
     transportServices,
     transportRoutes,
   };

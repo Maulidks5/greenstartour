@@ -11,6 +11,7 @@ const navLinks = [
   { label: "Tours & Safari", href: "/tours" },
   { label: "Hotels", href: "/hotels" },
   { label: "Transportation", href: "/transport" },
+  { label: "Partners", href: "/partnership" },
   { label: "About Us", href: "/about" },
   { label: "Contact / Booking", href: "/contact" },
 ];
@@ -69,7 +70,7 @@ export const Navbar = () => {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-6 lg:flex">
+        <nav className="hidden items-center gap-5 lg:flex">
           {navLinks.map((l) => (
             <NavLink
               key={l.href}

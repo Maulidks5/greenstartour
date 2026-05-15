@@ -882,7 +882,7 @@ function normalizePayload(form: Record<string, any>, fields: Field[]) {
 }
 
 function isImageColumn(column: string) {
-  return column === "image" || column === "main_image" || column === "gallery_images";
+  return column === "image" || column === "logo" || column === "main_image" || column === "gallery_images";
 }
 
 function GalleryThumbs({ value }: { value: any }) {

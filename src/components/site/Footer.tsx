@@ -45,6 +45,7 @@ export const Footer = () => {
               { label: "Hotels", href: "/hotels" },
               { label: "Transport", href: "/transport" },
               { label: "Safaris", href: "/safari-packages" },
+              { label: "Partnership", href: "/partnership" },
               { label: "Gallery", href: "/gallery" },
               { label: "About Us", href: "/about" },
               { label: "Contact", href: "/contact" },

@@ -50,6 +50,26 @@ class DashboardController extends Controller
             'created_at' => $booking->created_at?->toDateTimeString(),
         ]);
 
+        $recentInquiries = Inquiry::latest()->limit(5)->get()->map(fn (Inquiry $inquiry) => [
+            'id' => 'inquiry-'.$inquiry->id,
+            'type' => 'Contact inquiry',
+            'name' => $inquiry->full_name,
+            'service' => $inquiry->subject,
+            'contact' => $inquiry->whatsapp_number,
+            'status' => $inquiry->status,
+            'created_at' => $inquiry->created_at?->toDateTimeString(),
+        ]);
+
+        $recentPartnerships = PartnershipRequest::latest()->limit(5)->get()->map(fn (PartnershipRequest $partnershipRequest) => [
+            'id' => 'partnership-'.$partnershipRequest->id,
+            'type' => 'Partnership',
+            'name' => $partnershipRequest->full_name,
+            'service' => $partnershipRequest->partnership_type,
+            'contact' => $partnershipRequest->whatsapp_number,
+            'status' => $partnershipRequest->status,
+            'created_at' => $partnershipRequest->created_at?->toDateTimeString(),
+        ]);
+
         return Inertia::render('Admin/Dashboard', [
             'stats' => [
                 'totalTours' => Tour::count(),
@@ -67,6 +87,8 @@ class DashboardController extends Controller
             'latestRequests' => $recentTourBookings
                 ->concat($recentHotelBookings)
                 ->concat($recentTransport)
+                ->concat($recentInquiries)
+                ->concat($recentPartnerships)
                 ->sortByDesc('created_at')
                 ->values()
                 ->take(8),

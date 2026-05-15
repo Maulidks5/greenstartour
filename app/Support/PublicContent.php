@@ -5,6 +5,7 @@ namespace App\Support;
 use App\Models\Gallery;
 use App\Models\HeroSlide;
 use App\Models\Hotel;
+use App\Models\PartnershipRequest;
 use App\Models\SiteSetting;
 use App\Models\Testimonial;
 use App\Models\Tour;
@@ -37,6 +38,10 @@ class PublicContent
             'testimonials' => Testimonial::where('status', 'active')
                 ->latest()
                 ->get(),
+            'partners' => PartnershipRequest::where('status', 'approved')
+                ->whereNotNull('logo')
+                ->latest()
+                ->get(['id', 'company_name', 'full_name', 'logo']),
             'transportServices' => TransportService::where('status', 'active')
                 ->orderBy('sort_order')
                 ->orderBy('title')

@@ -115,6 +115,16 @@
   .gradient-gold { background: var(--gradient-gold); }
   .gradient-green { background: var(--gradient-green); }
   .gradient-sunset { background: var(--gradient-sunset); }
+  .partners-marquee {
+    display: flex;
+    width: max-content;
+    gap: 1rem;
+    padding-inline: 1.25rem;
+    animation: partners-marquee 28s linear infinite;
+  }
+  .partners-marquee:hover {
+    animation-play-state: paused;
+  }
   .text-gradient-ocean {
     background: var(--gradient-ocean);
     -webkit-background-clip: text;
@@ -146,6 +156,11 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes partners-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 @layer components {

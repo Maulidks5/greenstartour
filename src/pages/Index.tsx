@@ -3,7 +3,7 @@ import { Hero } from "@/components/site/Hero";
 import { FeaturedTours } from "@/components/site/FeaturedTours";
 import { Gallery } from "@/components/site/Gallery";
 import { Testimonials } from "@/components/site/Testimonials";
-import { FinalBookingCTA } from "@/components/site/CtaSections";
+import { ApprovedPartners, FinalBookingCTA, PartnershipCTA } from "@/components/site/CtaSections";
 import { WhyChooseUs } from "@/components/site/WhyChooseUs";
 import { TravelServices } from "@/components/site/TravelServices";
 import { SEO, siteImage, siteUrl } from "@/components/site/SEO";
@@ -46,6 +46,8 @@ const Index = () => {
       <WhyChooseUs />
       <Gallery />
       <Testimonials />
+      <ApprovedPartners />
+      <PartnershipCTA />
       <FinalBookingCTA />
     </SiteLayout>
   );
