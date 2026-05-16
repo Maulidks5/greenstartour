@@ -604,6 +604,10 @@ function compressImage(file: File): Promise<File> {
     return Promise.reject(new Error("Not an image"));
   }
 
+  if (keepsTransparency(file)) {
+    return Promise.resolve(file);
+  }
+
   return new Promise((resolve, reject) => {
     const image = new Image();
     const reader = new FileReader();
@@ -649,7 +653,11 @@ function compressImage(file: File): Promise<File> {
 
 function isAcceptableImage(file: File) {
   if (file.type.startsWith("image/")) return true;
-  return /\.(jpe?g|png|webp)$/i.test(file.name);
+  return /\.(jpe?g|png|webp|svg)$/i.test(file.name);
+}
+
+function keepsTransparency(file: File) {
+  return /image\/(png|webp|svg\+xml)/i.test(file.type) || /\.(png|webp|svg)$/i.test(file.name);
 }
 
 function AdminModal({ title, children, onClose }: { title: string; children: React.ReactNode; onClose: () => void }) {

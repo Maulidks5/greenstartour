@@ -92,10 +92,11 @@ const PartnershipPage = () => {
                 </span>
                 <Input
                   type="file"
-                  accept="image/*"
+                  accept="image/png,image/webp,image/svg+xml,image/jpeg"
                   onChange={(event) => setLogo(event.target.files?.[0] ?? null)}
                   className="h-auto bg-white py-2"
                 />
+                <span className="mt-2 block text-xs">PNG, WebP, or SVG keeps a transparent logo best.</span>
                 {logo ? <span className="mt-2 block text-xs font-semibold text-island-green">{logo.name}</span> : null}
               </label>
               <Textarea rows={4} value={form.message} onChange={(event) => update("message", event.target.value)} placeholder="Tell us what you want to build..." />
