@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\PartnershipApproved;
 use App\Models\Booking;
 use App\Models\Gallery;
 use App\Models\HeroSlide;
@@ -22,6 +23,8 @@ use App\Support\BookingNotifier;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -561,6 +564,7 @@ class ResourceController extends Controller
 
     public function updatePartnershipRequest(Request $request, PartnershipRequest $partnershipRequest): RedirectResponse
     {
+        $wasApproved = $partnershipRequest->status === 'approved';
         $data = $request->validate([
             'logo' => ['nullable'],
             'status' => ['required', 'in:pending,approved,rejected'],
@@ -569,6 +573,17 @@ class ResourceController extends Controller
         $data['logo'] = $this->uploadedImagePath($request, 'logo', $partnershipRequest->logo);
 
         $partnershipRequest->update($data);
+
+        if (! $wasApproved && $partnershipRequest->status === 'approved' && $partnershipRequest->email) {
+            try {
+                Mail::to($partnershipRequest->email)->send(new PartnershipApproved($partnershipRequest->fresh()));
+            } catch (\Throwable $exception) {
+                Log::warning('Partnership approval email failed', [
+                    'partnership_request_id' => $partnershipRequest->id,
+                    'error' => $exception->getMessage(),
+                ]);
+            }
+        }
 
         return back()->with('success', 'Partnership status updated.');
     }
