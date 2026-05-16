@@ -187,7 +187,7 @@ class PublicSubmissionController extends Controller
             'whatsapp_number' => ['nullable', 'string', 'max:255'],
             'partnership_type' => ['required', 'string', 'max:255'],
             'message' => ['nullable', 'string', 'max:5000'],
-            'logo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,svg', 'max:2048'],
+            'logo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp,svg', 'max:2048'],
         ]);
 
         if ($request->hasFile('logo')) {

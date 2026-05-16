@@ -713,8 +713,8 @@ function ImageThumb({ src, large = false }: { src: string; large?: boolean }) {
   }
 
   return (
-    <div className={`${large ? "h-36 w-full" : "h-14 w-20"} overflow-hidden rounded-xl border border-border bg-secondary`}>
-      <img src={src} alt="Uploaded preview" className="h-full w-full object-cover" onError={() => setFailed(true)} />
+    <div className={`${large ? "h-36 w-full" : "h-14 w-20"} overflow-hidden rounded-xl border border-border bg-white p-2`}>
+      <img src={src} alt="Uploaded preview" className="h-full w-full object-contain" onError={() => setFailed(true)} />
     </div>
   );
 }
