@@ -28,9 +28,8 @@ export const ApprovedPartners = () => {
         <div className="overflow-hidden rounded-2xl border border-border/70 bg-white py-5 shadow-card-luxury [mask-image:linear-gradient(to_right,transparent,black_9%,black_91%,transparent)]">
           <div className="partners-marquee">
             {marqueePartners.map((partner, index) => (
-              <div key={`${partner.id}-${index}`} className="flex h-24 min-w-52 flex-col items-center justify-center gap-2 rounded-xl border border-border/60 bg-secondary/25 px-6">
+              <div key={`${partner.id}-${index}`} className="flex h-24 min-w-52 items-center justify-center rounded-2xl bg-white px-6 shadow-card-luxury ring-1 ring-border/70">
                 <img src={partner.logo} alt={`${partner.name} logo`} loading="lazy" className="max-h-14 max-w-36 object-contain" />
-                <span className="max-w-40 truncate text-center text-sm font-bold text-primary">{partner.name}</span>
               </div>
             ))}
           </div>

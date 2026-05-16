@@ -1,4 +1,4 @@
-import { Briefcase, Handshake, Hotel, Megaphone, Send } from "lucide-react";
+import { Briefcase, Handshake, Hotel, ImagePlus, Megaphone, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -18,6 +18,7 @@ const partners = [
 
 const PartnershipPage = () => {
   const [processing, setProcessing] = useState(false);
+  const [logo, setLogo] = useState<File | null>(null);
   const [form, setForm] = useState({
     full_name: "",
     company_name: "",
@@ -64,9 +65,13 @@ const PartnershipPage = () => {
                 event.preventDefault();
                 setProcessing(true);
                 try {
-                  await postPublicForm("/partnership-inquiries", form);
+                  const payload = new FormData();
+                  Object.entries(form).forEach(([key, value]) => payload.append(key, value));
+                  if (logo) payload.append("logo", logo);
+                  await postPublicForm("/partnership-inquiries", payload);
                   toast.success("Partnership inquiry sent. We will contact you soon.");
                   setForm({ full_name: "", company_name: "", email: "", whatsapp_number: "", partnership_type: "", message: "" });
+                  setLogo(null);
                 } catch (error) {
                   toast.error(error instanceof Error ? error.message : "Partnership inquiry could not be sent.");
                 } finally {
@@ -80,6 +85,19 @@ const PartnershipPage = () => {
               <Input required type="email" value={form.email} onChange={(event) => update("email", event.target.value)} placeholder="Email address" />
               <Input value={form.whatsapp_number} onChange={(event) => update("whatsapp_number", event.target.value)} placeholder="WhatsApp number" />
               <Input required value={form.partnership_type} onChange={(event) => update("partnership_type", event.target.value)} placeholder="Partnership type" />
+              <label className="block rounded-xl border border-dashed border-border bg-secondary/30 p-4 text-sm text-muted-foreground">
+                <span className="mb-2 flex items-center gap-2 font-bold text-primary">
+                  <ImagePlus className="h-4 w-4 text-accent" />
+                  Partner logo
+                </span>
+                <Input
+                  type="file"
+                  accept="image/*"
+                  onChange={(event) => setLogo(event.target.files?.[0] ?? null)}
+                  className="h-auto bg-white py-2"
+                />
+                {logo ? <span className="mt-2 block text-xs font-semibold text-island-green">{logo.name}</span> : null}
+              </label>
               <Textarea rows={4} value={form.message} onChange={(event) => update("message", event.target.value)} placeholder="Tell us what you want to build..." />
               <Button disabled={processing} type="submit" variant="luxury" size="lg" className="w-full">
                 {processing ? "Sending..." : "Send Partnership Inquiry"} <Send className="h-4 w-4" />

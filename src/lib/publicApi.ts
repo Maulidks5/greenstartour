@@ -9,14 +9,18 @@ const cookieValue = (name: string) => {
   return cookie ? decodeURIComponent(cookie) : "";
 };
 
-const sendRequest = (url: string, payload: Record<string, unknown>) =>
+const sendRequest = (url: string, payload: Record<string, unknown> | FormData) =>
   {
     const xsrfToken = cookieValue("XSRF-TOKEN");
     const headers: Record<string, string> = {
-      "Content-Type": "application/json",
       Accept: "application/json",
       "X-Requested-With": "XMLHttpRequest",
     };
+    const isFormData = payload instanceof FormData;
+
+    if (!isFormData) {
+      headers["Content-Type"] = "application/json";
+    }
 
     if (xsrfToken) {
       headers["X-XSRF-TOKEN"] = xsrfToken;
@@ -28,11 +32,11 @@ const sendRequest = (url: string, payload: Record<string, unknown>) =>
     method: "POST",
     credentials: "same-origin",
     headers,
-    body: JSON.stringify(payload),
+    body: isFormData ? payload : JSON.stringify(payload),
   });
   };
 
-export const postPublicForm = async (url: string, payload: Record<string, unknown>) => {
+export const postPublicForm = async (url: string, payload: Record<string, unknown> | FormData) => {
   await fetch(window.location.href, {
     method: "GET",
     credentials: "same-origin",

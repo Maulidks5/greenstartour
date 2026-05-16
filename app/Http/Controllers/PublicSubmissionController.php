@@ -14,6 +14,8 @@ use App\Models\TransportRoute;
 use App\Support\PublicSubmissionMailer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PublicSubmissionController extends Controller
 {
@@ -178,14 +180,23 @@ class PublicSubmissionController extends Controller
 
     public function partnership(Request $request): JsonResponse
     {
-        PartnershipRequest::create($request->validate([
+        $data = $request->validate([
             'full_name' => ['required', 'string', 'max:255'],
             'company_name' => ['nullable', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255'],
             'whatsapp_number' => ['nullable', 'string', 'max:255'],
             'partnership_type' => ['required', 'string', 'max:255'],
             'message' => ['nullable', 'string', 'max:5000'],
-        ]) + ['status' => 'pending']);
+            'logo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,svg', 'max:2048'],
+        ]);
+
+        if ($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            $filename = Str::uuid().'.'.$file->getClientOriginalExtension();
+            $data['logo'] = Storage::url($file->storeAs('partner-logos', $filename, 'public'));
+        }
+
+        PartnershipRequest::create($data + ['status' => 'pending']);
 
         return response()->json(['message' => 'Partnership request sent.']);
     }
