@@ -24,7 +24,7 @@ const TourDetails = () => {
     email: "",
     whatsapp: "",
     date: "",
-    adults: "2",
+    adults: "1",
     children: "0",
     pickup: "",
     message: "",
@@ -37,8 +37,9 @@ const TourDetails = () => {
   const adultPrice = Number(tour.adultPrice || 0);
   const childPrice = Number(tour.childPrice || 0);
   const individualAvailable = adultPrice > 0 || childPrice > 0;
-  const groupAvailable = groupPrice > 0 && (tour.pricingType === "group" || (individualAvailable && groupPrice !== adultPrice));
-  const activePricingMode = pricingMode === "group" && groupAvailable ? "group" : "individual";
+  const groupAvailable = groupPrice > 0;
+  const showPricingSelector = individualAvailable || groupAvailable;
+  const activePricingMode = pricingMode === "group" && groupAvailable ? "group" : pricingMode === "individual" && individualAvailable ? "individual" : groupAvailable ? "group" : "individual";
   const isGroupPricing = activePricingMode === "group";
   const estimatedTotal = isGroupPricing ? groupPrice : adultPrice || childPrice ? adultCount * adultPrice + childCount * childPrice : 0;
 
@@ -215,7 +216,7 @@ const TourDetails = () => {
                     message: [`Pricing option: ${isGroupPricing ? "Group package" : "Individual per person"}`, booking.message].filter(Boolean).join("\n"),
                   });
                   toast.success("Booking inquiry sent. We will reply on WhatsApp shortly.");
-                  setBooking({ name: "", email: "", whatsapp: "", date: "", adults: "2", children: "0", pickup: "", message: "" });
+                  setBooking({ name: "", email: "", whatsapp: "", date: "", adults: "1", children: "0", pickup: "", message: "" });
                 } catch (error) {
                   toast.error(error instanceof Error ? error.message : "Booking could not be sent.");
                 } finally {
@@ -229,22 +230,27 @@ const TourDetails = () => {
                 <h2 className="font-display text-3xl font-semibold text-primary">{tour.price}</h2>
               </div>
               <div className="space-y-4">
-                {individualAvailable && groupAvailable && (
-                  <div className="grid grid-cols-2 gap-2 rounded-2xl bg-secondary/45 p-1">
-                    <button
-                      type="button"
-                      onClick={() => setPricingMode("individual")}
-                      className={`rounded-xl px-3 py-2 text-sm font-bold transition-colors ${!isGroupPricing ? "bg-white text-primary shadow-card-luxury" : "text-muted-foreground hover:text-primary"}`}
-                    >
-                      Individual
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setPricingMode("group")}
-                      className={`rounded-xl px-3 py-2 text-sm font-bold transition-colors ${isGroupPricing ? "bg-white text-primary shadow-card-luxury" : "text-muted-foreground hover:text-primary"}`}
-                    >
-                      Group
-                    </button>
+                {showPricingSelector && (
+                  <div className="rounded-2xl border border-border/70 bg-secondary/45 p-3">
+                    <div className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">Pricing option</div>
+                    <div className="grid grid-cols-2 gap-2 rounded-xl bg-white/70 p-1">
+                      <button
+                        type="button"
+                        disabled={!individualAvailable}
+                        onClick={() => setPricingMode("individual")}
+                        className={`rounded-lg px-3 py-2 text-sm font-bold transition-colors disabled:cursor-not-allowed disabled:opacity-45 ${!isGroupPricing ? "bg-primary text-white shadow-card-luxury" : "text-muted-foreground hover:text-primary"}`}
+                      >
+                        Individual
+                      </button>
+                      <button
+                        type="button"
+                        disabled={!groupAvailable}
+                        onClick={() => setPricingMode("group")}
+                        className={`rounded-lg px-3 py-2 text-sm font-bold transition-colors disabled:cursor-not-allowed disabled:opacity-45 ${isGroupPricing ? "bg-primary text-white shadow-card-luxury" : "text-muted-foreground hover:text-primary"}`}
+                      >
+                        Group
+                      </button>
+                    </div>
                   </div>
                 )}
                 {isGroupPricing && groupPrice > 0 && (
