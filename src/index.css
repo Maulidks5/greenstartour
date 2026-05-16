@@ -120,7 +120,7 @@
     width: max-content;
     gap: 1rem;
     padding-inline: 1.25rem;
-    animation: partners-marquee 28s linear infinite;
+    animation: partners-marquee 34s linear infinite;
   }
   .partners-marquee:hover {
     animation-play-state: paused;

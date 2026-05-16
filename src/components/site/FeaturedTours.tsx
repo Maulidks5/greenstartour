@@ -7,6 +7,7 @@ import { usePublicContent } from "@/hooks/use-public-content";
 
 export const FeaturedTours = () => {
   const { featuredTours } = usePublicContent();
+  const homepageTours = featuredTours.slice(0, 6);
 
   return (
     <section className="bg-secondary/40 py-16 md:py-20">
@@ -17,7 +18,7 @@ export const FeaturedTours = () => {
         />
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {featuredTours.map((tour) => (
+          {homepageTours.map((tour) => (
             <article key={tour.id} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/70 bg-white shadow-card-luxury transition-all duration-300 hover:-translate-y-1 hover:shadow-luxury">
               <Link to={`/tours/${tour.id}`} className="relative block aspect-[16/9] overflow-hidden bg-secondary">
                 <img src={tour.image} alt={tour.name} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />

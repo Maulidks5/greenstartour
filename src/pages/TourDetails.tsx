@@ -32,9 +32,11 @@ const TourDetails = () => {
   const [bookingProcessing, setBookingProcessing] = useState(false);
   const adultCount = Math.max(1, Number(booking.adults || 1));
   const childCount = Math.max(0, Number(booking.children || 0));
+  const isGroupPricing = tour.pricingType === "group";
+  const groupPrice = Number(tour.groupPrice || 0);
   const adultPrice = Number(tour.adultPrice || 0);
   const childPrice = Number(tour.childPrice || 0);
-  const estimatedTotal = adultPrice || childPrice ? adultCount * adultPrice + childCount * childPrice : 0;
+  const estimatedTotal = isGroupPricing ? groupPrice : adultPrice || childPrice ? adultCount * adultPrice + childCount * childPrice : 0;
 
   const related = allTours.filter((item) => item.id !== tour.id && item.category === tour.category).slice(0, 3);
   const categoryGallery = useMemo(() => {
@@ -58,7 +60,7 @@ const TourDetails = () => {
     `Adults: ${adultCount}`,
     `Children: ${childCount}`,
     booking.pickup && `Pickup: ${booking.pickup}`,
-    estimatedTotal > 0 && `Estimated total: ${formatCurrency(estimatedTotal, siteSettings.currencySymbol)}`,
+    estimatedTotal > 0 && `${isGroupPricing ? "Package price" : "Estimated total"}: ${formatCurrency(estimatedTotal, siteSettings.currencySymbol)}`,
     booking.message && `Message: ${booking.message}`,
   ]
     .filter(Boolean)
@@ -221,7 +223,17 @@ const TourDetails = () => {
                 <h2 className="font-display text-3xl font-semibold text-primary">{tour.price}</h2>
               </div>
               <div className="space-y-4">
-                {(adultPrice > 0 || childPrice > 0) && (
+                {isGroupPricing && groupPrice > 0 && (
+                  <div className="rounded-2xl border border-accent/25 bg-secondary/45 p-4">
+                    <div className="text-xs font-bold uppercase tracking-[0.16em] text-accent">Fixed group price</div>
+                    <div className="mt-2 flex items-center justify-between gap-4">
+                      <span className="text-sm font-semibold text-muted-foreground">Package total</span>
+                      <span className="font-display text-2xl font-semibold text-primary">{formatCurrency(groupPrice, siteSettings.currencySymbol)}</span>
+                    </div>
+                    {tour.pricingNote ? <p className="mt-2 text-xs text-muted-foreground">{tour.pricingNote}</p> : null}
+                  </div>
+                )}
+                {!isGroupPricing && (adultPrice > 0 || childPrice > 0) && (
                   <div className="rounded-2xl border border-accent/25 bg-secondary/45 p-4">
                     <div className="grid grid-cols-2 gap-3 text-sm">
                       <PriceLine label="Adult" value={adultPrice} />

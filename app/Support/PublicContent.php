@@ -36,6 +36,7 @@ class PublicContent
                 ->latest()
                 ->get(),
             'testimonials' => Testimonial::where('status', 'active')
+                ->where('show_on_home', true)
                 ->latest()
                 ->get(),
             'partners' => PartnershipRequest::where('status', 'approved')

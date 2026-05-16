@@ -45,6 +45,7 @@ type BackendTour = {
   title: string;
   location: string;
   duration: string;
+  pricing_type?: "individual" | "group" | string | null;
   price?: number | string | null;
   adult_price?: number | string | null;
   child_price?: number | string | null;
@@ -308,7 +309,9 @@ const mapContent = (content?: BackendContent) => {
           overview: tour.description || tour.short_description || "A curated Green Star Island experience with reliable local planning.",
           rating: Number(tour.rating || 4.9),
           reviews: 0,
-          price: priceLabel(tour.adult_price || tour.price, currencySymbol),
+          pricingType: tour.pricing_type === "group" ? "group" : "individual",
+          price: priceLabel(tour.pricing_type === "group" ? tour.price : tour.adult_price || tour.price, currencySymbol),
+          groupPrice: Number(tour.price || 0),
           adultPrice: Number(tour.adult_price || tour.price || 0),
           childPrice: Number(tour.child_price || 0),
           pricingNote: tour.pricing_note || undefined,

@@ -42,6 +42,8 @@ export type Tour = {
   rating: number;
   reviews: number;
   price: string;
+  pricingType?: "individual" | "group";
+  groupPrice?: number;
   adultPrice: number;
   childPrice: number;
   pricingNote?: string;

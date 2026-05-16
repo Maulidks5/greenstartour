@@ -54,16 +54,26 @@ export const Testimonials = () => {
             </div>
 
             {canSlide && (
-              <div className="mt-6 flex items-center justify-center gap-2">
-                {testimonials.map((review, index) => (
-                  <button
-                    key={`${review.name}-${index}`}
-                    type="button"
-                    onClick={() => setActive(index)}
-                    aria-label={`Show review ${index + 1}`}
-                    className={`h-2 rounded-full transition-all ${index === active ? "w-9 bg-island-green" : "w-2 bg-border hover:bg-island-green/60"}`}
-                  />
-                ))}
+              <div className="mt-6 flex items-center justify-center gap-4">
+                <button
+                  type="button"
+                  onClick={() => setActive((current) => (current - 1 + testimonials.length) % testimonials.length)}
+                  className="grid h-9 w-9 place-items-center rounded-full border border-border bg-white text-sm font-bold text-primary shadow-card-luxury transition-colors hover:bg-island-green-soft"
+                  aria-label="Previous reviews"
+                >
+                  ‹
+                </button>
+                <div className="min-w-24 rounded-full bg-island-green-soft px-4 py-2 text-center text-xs font-bold text-primary">
+                  {active + 1} / {testimonials.length}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActive((current) => (current + 1) % testimonials.length)}
+                  className="grid h-9 w-9 place-items-center rounded-full border border-border bg-white text-sm font-bold text-primary shadow-card-luxury transition-colors hover:bg-island-green-soft"
+                  aria-label="Next reviews"
+                >
+                  ›
+                </button>
               </div>
             )}
           </div>

@@ -224,9 +224,13 @@ class ResourceController extends Controller
             ['name' => 'title', 'label' => 'Title', 'type' => 'text', 'required' => true],
             ['name' => 'location', 'label' => 'Location', 'type' => 'text', 'required' => true],
             ['name' => 'duration', 'label' => 'Duration', 'type' => 'text', 'required' => true],
-            ['name' => 'price', 'label' => 'Display Price', 'type' => 'number'],
-            ['name' => 'adult_price', 'label' => 'Adult Price', 'type' => 'number'],
-            ['name' => 'child_price', 'label' => 'Child Price', 'type' => 'number'],
+            ['name' => 'pricing_type', 'label' => 'Pricing Type', 'type' => 'select', 'options' => [
+                ['id' => 'individual', 'name' => 'Individual - calculate per person'],
+                ['id' => 'group', 'name' => 'Group - fixed package price'],
+            ]],
+            ['name' => 'price', 'label' => 'Group / Display Price', 'type' => 'number', 'help' => 'For group pricing, this is the fixed package price. For individual pricing, leave empty or use as fallback display price.'],
+            ['name' => 'adult_price', 'label' => 'Adult Price Per Person', 'type' => 'number'],
+            ['name' => 'child_price', 'label' => 'Child Price Per Person', 'type' => 'number'],
             ['name' => 'pricing_note', 'label' => 'Pricing Note', 'type' => 'text'],
             ['name' => 'short_description', 'label' => 'Short Description', 'type' => 'textarea', 'required' => true],
             ['name' => 'description', 'label' => 'Description', 'type' => 'textarea'],
@@ -238,7 +242,7 @@ class ResourceController extends Controller
             ['name' => 'rating', 'label' => 'Rating', 'type' => 'number'],
             ['name' => 'status', 'label' => 'Status', 'type' => 'select', 'options' => ['active', 'inactive']],
             ['name' => 'is_featured', 'label' => 'Featured', 'type' => 'checkbox'],
-        ], ['main_image', 'gallery_images', 'title', 'category.name', 'adult_price', 'child_price', 'location', 'status']);
+        ], ['main_image', 'gallery_images', 'title', 'category.name', 'pricing_type', 'price', 'adult_price', 'child_price', 'location', 'status']);
     }
 
     public function storeTour(Request $request): RedirectResponse
@@ -517,8 +521,9 @@ class ResourceController extends Controller
             ['name' => 'rating', 'label' => 'Rating', 'type' => 'number'],
             ['name' => 'review', 'label' => 'Review', 'type' => 'textarea', 'required' => true],
             ['name' => 'image', 'label' => 'Image', 'type' => 'image'],
+            ['name' => 'show_on_home', 'label' => 'Show on Homepage', 'type' => 'checkbox'],
             ['name' => 'status', 'label' => 'Status', 'type' => 'select', 'options' => ['active', 'inactive']],
-        ], ['image', 'name', 'country', 'rating', 'status']);
+        ], ['image', 'name', 'country', 'rating', 'show_on_home', 'status']);
     }
 
     public function storeTestimonial(Request $request): RedirectResponse
@@ -660,6 +665,7 @@ class ResourceController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'location' => ['required', 'string', 'max:255'],
             'duration' => ['required', 'string', 'max:255'],
+            'pricing_type' => ['nullable', 'in:individual,group'],
             'price' => ['nullable', 'numeric', 'min:0'],
             'adult_price' => ['nullable', 'numeric', 'min:0'],
             'child_price' => ['nullable', 'numeric', 'min:0'],
@@ -683,6 +689,7 @@ class ResourceController extends Controller
         return [
             ...$data,
             'slug' => Str::slug($data['title']),
+            'pricing_type' => $data['pricing_type'] ?? 'individual',
             'description' => $data['description'] ?? $data['short_description'],
             'highlights' => $this->listInput($request, 'highlights'),
             'included' => $this->listInput($request, 'included'),
@@ -790,6 +797,7 @@ class ResourceController extends Controller
             'rating' => ['nullable', 'integer', 'min:1', 'max:5'],
             'review' => ['required', 'string'],
             'image' => ['nullable'],
+            'show_on_home' => ['boolean'],
             'status' => ['required', 'in:active,inactive'],
         ];
     }

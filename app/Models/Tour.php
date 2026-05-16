@@ -14,6 +14,7 @@ class Tour extends Model
         'slug',
         'location',
         'duration',
+        'pricing_type',
         'price',
         'adult_price',
         'child_price',

@@ -39,6 +39,15 @@ class PublicSubmissionController extends Controller
         ]);
 
         $tour = isset($data['tour_slug']) ? Tour::where('slug', $data['tour_slug'])->first() : null;
+        $adults = $data['number_of_adults'] ?? $data['number_of_guests'] ?? 1;
+        $children = $data['number_of_children'] ?? 0;
+        $estimatedTotal = $data['estimated_total'] ?? null;
+
+        if (! $estimatedTotal && $tour) {
+            $estimatedTotal = $tour->pricing_type === 'group'
+                ? $tour->price
+                : (($adults * (float) ($tour->adult_price ?? $tour->price ?? 0)) + ($children * (float) ($tour->child_price ?? 0)));
+        }
 
         $booking = Booking::create([
             'tour_id' => $tour?->id,
@@ -47,11 +56,11 @@ class PublicSubmissionController extends Controller
             'whatsapp_number' => $data['whatsapp_number'],
             'country' => $data['country'] ?? null,
             'travel_date' => $data['travel_date'] ?? null,
-            'number_of_adults' => $data['number_of_adults'] ?? $data['number_of_guests'] ?? 1,
-            'number_of_children' => $data['number_of_children'] ?? 0,
+            'number_of_adults' => $adults,
+            'number_of_children' => $children,
             'pickup_location' => $data['pickup_location'] ?? null,
-            'number_of_guests' => $data['number_of_guests'] ?? 1,
-            'estimated_total' => $data['estimated_total'] ?? null,
+            'number_of_guests' => $data['number_of_guests'] ?? ($adults + $children),
+            'estimated_total' => $estimatedTotal ?: null,
             'message' => $data['message'] ?? null,
             'status' => 'pending',
         ]);
