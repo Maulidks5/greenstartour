@@ -17,6 +17,25 @@ class PublicContent
 {
     public static function payload(): array
     {
+        $tourReviewStats = Testimonial::where('status', 'active')
+            ->whereNotNull('tour_id')
+            ->selectRaw('tour_id, COUNT(*) as review_count, AVG(rating) as review_rating')
+            ->groupBy('tour_id')
+            ->get()
+            ->keyBy('tour_id');
+        $tours = Tour::with('category:id,name,slug')
+            ->where('status', 'active')
+            ->latest()
+            ->get()
+            ->map(function (Tour $tour) use ($tourReviewStats) {
+                $stats = $tourReviewStats->get($tour->id);
+
+                $tour->setAttribute('review_count', (int) ($stats?->review_count ?? 0));
+                $tour->setAttribute('review_rating', $stats ? round((float) $stats->review_rating, 1) : null);
+
+                return $tour;
+            });
+
         return [
             'settings' => SiteSetting::where('status', 'active')
                 ->pluck('value', 'key'),
@@ -25,10 +44,7 @@ class PublicContent
                 ->orderBy('sort_order')
                 ->orderBy('id')
                 ->get(),
-            'tours' => Tour::with('category:id,name,slug')
-                ->where('status', 'active')
-                ->latest()
-                ->get(),
+            'tours' => $tours,
             'hotels' => Hotel::where('status', 'active')
                 ->latest()
                 ->get(),

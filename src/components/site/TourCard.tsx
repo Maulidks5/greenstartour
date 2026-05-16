@@ -45,7 +45,9 @@ export const TourCard = ({ tour }: { tour: Tour }) => (
           <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Starting price</div>
           <div className="font-display text-2xl font-semibold text-primary">{tour.price}</div>
         </div>
-        <span className="text-xs font-semibold text-muted-foreground">{tour.reviews} reviews</span>
+        {tour.reviews > 0 ? (
+          <span className="text-xs font-semibold text-muted-foreground">{tour.reviews} review{tour.reviews === 1 ? "" : "s"}</span>
+        ) : null}
         </div>
         <div className="grid grid-cols-2 gap-2">
           <Button variant="secondary" size="sm" asChild>

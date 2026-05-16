@@ -203,12 +203,21 @@ class PublicSubmissionController extends Controller
 
     public function testimonial(Request $request): JsonResponse
     {
-        Testimonial::create($request->validate([
+        $data = $request->validate([
+            'tour_slug' => ['nullable', 'string'],
             'name' => ['required', 'string', 'max:255'],
             'country' => ['nullable', 'string', 'max:255'],
             'rating' => ['required', 'integer', 'min:1', 'max:5'],
             'review' => ['required', 'string', 'min:10', 'max:1000'],
-        ]) + ['status' => 'pending']);
+        ]);
+
+        $tour = isset($data['tour_slug']) ? Tour::where('slug', $data['tour_slug'])->first() : null;
+        unset($data['tour_slug']);
+
+        Testimonial::create($data + [
+            'tour_id' => $tour?->id,
+            'status' => 'pending',
+        ]);
 
         return response()->json(['message' => 'Review received and waiting for approval.']);
     }

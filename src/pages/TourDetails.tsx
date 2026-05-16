@@ -30,12 +30,16 @@ const TourDetails = () => {
     message: "",
   });
   const [bookingProcessing, setBookingProcessing] = useState(false);
+  const [pricingMode, setPricingMode] = useState<"individual" | "group">(tour.pricingType === "group" ? "group" : "individual");
   const adultCount = Math.max(1, Number(booking.adults || 1));
   const childCount = Math.max(0, Number(booking.children || 0));
-  const isGroupPricing = tour.pricingType === "group";
   const groupPrice = Number(tour.groupPrice || 0);
   const adultPrice = Number(tour.adultPrice || 0);
   const childPrice = Number(tour.childPrice || 0);
+  const individualAvailable = adultPrice > 0 || childPrice > 0;
+  const groupAvailable = groupPrice > 0 && (tour.pricingType === "group" || (individualAvailable && groupPrice !== adultPrice));
+  const activePricingMode = pricingMode === "group" && groupAvailable ? "group" : "individual";
+  const isGroupPricing = activePricingMode === "group";
   const estimatedTotal = isGroupPricing ? groupPrice : adultPrice || childPrice ? adultCount * adultPrice + childCount * childPrice : 0;
 
   const related = allTours.filter((item) => item.id !== tour.id && item.category === tour.category).slice(0, 3);
@@ -59,6 +63,7 @@ const TourDetails = () => {
     booking.date && `Travel date: ${formatReadableDate(booking.date)}`,
     `Adults: ${adultCount}`,
     `Children: ${childCount}`,
+    `Pricing option: ${isGroupPricing ? "Group package" : "Individual per person"}`,
     booking.pickup && `Pickup: ${booking.pickup}`,
     estimatedTotal > 0 && `${isGroupPricing ? "Package price" : "Estimated total"}: ${formatCurrency(estimatedTotal, siteSettings.currencySymbol)}`,
     booking.message && `Message: ${booking.message}`,
@@ -71,6 +76,7 @@ const TourDetails = () => {
 
   useEffect(() => {
     setSelectedImage(null);
+    setPricingMode(tour.pricingType === "group" ? "group" : "individual");
   }, [id]);
 
   if (!foundTour) return <Navigate to="/tours" replace />;
@@ -127,7 +133,7 @@ const TourDetails = () => {
             <div className="mt-6 grid gap-3 text-sm font-semibold text-white/90 sm:grid-cols-2 lg:grid-cols-4">
               <Meta icon={MapPin} text={tour.location} />
               <Meta icon={Clock} text={tour.duration} />
-              <Meta icon={Star} text={`${tour.rating} (${tour.reviews})`} />
+              <Meta icon={Star} text={tour.reviews > 0 ? `${tour.rating} (${tour.reviews} review${tour.reviews === 1 ? "" : "s"})` : `${tour.rating}`} />
               <span className="rounded-xl bg-white/12 px-4 py-3 text-accent backdrop-blur">{tour.price}</span>
             </div>
           </div>
@@ -206,7 +212,7 @@ const TourDetails = () => {
                     number_of_guests: adultCount + childCount,
                     pickup_location: booking.pickup || null,
                     estimated_total: estimatedTotal || null,
-                    message: booking.message,
+                    message: [`Pricing option: ${isGroupPricing ? "Group package" : "Individual per person"}`, booking.message].filter(Boolean).join("\n"),
                   });
                   toast.success("Booking inquiry sent. We will reply on WhatsApp shortly.");
                   setBooking({ name: "", email: "", whatsapp: "", date: "", adults: "2", children: "0", pickup: "", message: "" });
@@ -223,6 +229,24 @@ const TourDetails = () => {
                 <h2 className="font-display text-3xl font-semibold text-primary">{tour.price}</h2>
               </div>
               <div className="space-y-4">
+                {individualAvailable && groupAvailable && (
+                  <div className="grid grid-cols-2 gap-2 rounded-2xl bg-secondary/45 p-1">
+                    <button
+                      type="button"
+                      onClick={() => setPricingMode("individual")}
+                      className={`rounded-xl px-3 py-2 text-sm font-bold transition-colors ${!isGroupPricing ? "bg-white text-primary shadow-card-luxury" : "text-muted-foreground hover:text-primary"}`}
+                    >
+                      Individual
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setPricingMode("group")}
+                      className={`rounded-xl px-3 py-2 text-sm font-bold transition-colors ${isGroupPricing ? "bg-white text-primary shadow-card-luxury" : "text-muted-foreground hover:text-primary"}`}
+                    >
+                      Group
+                    </button>
+                  </div>
+                )}
                 {isGroupPricing && groupPrice > 0 && (
                   <div className="rounded-2xl border border-accent/25 bg-secondary/45 p-4">
                     <div className="text-xs font-bold uppercase tracking-[0.16em] text-accent">Fixed group price</div>

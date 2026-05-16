@@ -518,7 +518,8 @@ class ResourceController extends Controller
 
     public function testimonials(): Response
     {
-        return $this->resource('Testimonials', 'testimonials', Testimonial::latest()->get(), [
+        return $this->resource('Testimonials', 'testimonials', Testimonial::with('tour:id,title')->latest()->get(), [
+            ['name' => 'tour_id', 'label' => 'Related Tour', 'type' => 'select', 'options' => Tour::where('status', 'active')->orderBy('title')->get(['id', 'title as name'])],
             ['name' => 'name', 'label' => 'Name', 'type' => 'text', 'required' => true],
             ['name' => 'country', 'label' => 'Country', 'type' => 'text'],
             ['name' => 'rating', 'label' => 'Rating', 'type' => 'number'],
@@ -526,7 +527,7 @@ class ResourceController extends Controller
             ['name' => 'image', 'label' => 'Image', 'type' => 'image'],
             ['name' => 'show_on_home', 'label' => 'Show on Homepage', 'type' => 'checkbox'],
             ['name' => 'status', 'label' => 'Status', 'type' => 'select', 'options' => ['active', 'inactive']],
-        ], ['image', 'name', 'country', 'rating', 'show_on_home', 'status']);
+        ], ['image', 'tour.title', 'name', 'country', 'rating', 'show_on_home', 'status']);
     }
 
     public function storeTestimonial(Request $request): RedirectResponse
@@ -808,6 +809,7 @@ class ResourceController extends Controller
     {
         return [
             'name' => ['required', 'string', 'max:255'],
+            'tour_id' => ['nullable', 'exists:tours,id'],
             'country' => ['nullable', 'string', 'max:255'],
             'rating' => ['nullable', 'integer', 'min:1', 'max:5'],
             'review' => ['required', 'string'],
